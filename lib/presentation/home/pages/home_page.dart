@@ -11,6 +11,7 @@ import 'package:github_commit_history/core/widgets/drawer/drawer.dart';
 import 'package:github_commit_history/core/widgets/drawer/navbar.dart';
 import 'package:github_commit_history/core/widgets/forms/github_repo_form.dart';
 import 'package:github_commit_history/domain/models/commits_model.dart';
+import 'package:github_commit_history/domain/use_cases/github_use_cases/get_commit_tree_use_case.dart';
 import 'package:github_commit_history/domain/use_cases/github_use_cases/get_commits_use_case.dart';
 import 'package:github_commit_history/presentation/home/controllers/home_controller.dart';
 
@@ -45,9 +46,9 @@ class HomePage extends GetView<HomeController> {
                 end: Alignment.topLeft,
                 colors: [
                   AppTheme.colors.white,
-                  AppTheme.colors.white,
-                  AppTheme.colors.appQuaternary.withOpacity(0.2),
-                  AppTheme.colors.white,
+                  AppTheme.colors.white.withOpacity(0.3),
+                  AppTheme.colors.appSecondary.withOpacity(0.2),
+                  AppTheme.colors.white.withOpacity(0.3),
                   AppTheme.colors.white,
                 ],
               ),
@@ -161,18 +162,14 @@ class HomePage extends GetView<HomeController> {
         motion: const ScrollMotion(),
         children: [
           SlidableAction(
-            flex: 2,
-            onPressed: (_) async {},
-            backgroundColor: AppTheme.colors.appTertiary,
+            onPressed: (_) async {
+              await controller.getTreeCommit(
+                  title: commitModel.commit.message,
+                  params: GetCommitTreeParams(commitModel.commit.tree.url));
+            },
+            backgroundColor: AppTheme.colors.appSecondary,
             foregroundColor: Colors.white,
-            icon: FontAwesomeIcons.language,
-            label: 'Translate',
-          ),
-          SlidableAction(
-            onPressed: (_) async {},
-            backgroundColor: AppTheme.colors.appAlert,
-            foregroundColor: Colors.white,
-            icon: FontAwesomeIcons.trash,
+            icon: FontAwesomeIcons.eye,
             borderRadius: BorderRadius.only(
               bottomRight: Radius.circular(10.r),
               topRight: Radius.circular(10.r),
@@ -181,7 +178,11 @@ class HomePage extends GetView<HomeController> {
         ],
       ),
       child: GestureDetector(
-        onTap: () async {},
+        onTap: () async {
+          await controller.getTreeCommit(
+              title: commitModel.commit.message,
+              params: GetCommitTreeParams(commitModel.commit.tree.url));
+        },
         child: Container(
           decoration: BoxDecoration(
             color: AppTheme.colors.white,
@@ -201,17 +202,46 @@ class HomePage extends GetView<HomeController> {
                   fontSize: AppTheme.fontSize.f16,
                   color: AppTheme.colors.appPrimary,
                 )).paddingOnly(top: 4.h),
+            trailing: FaIcon(FontAwesomeIcons.github),
             subtitle: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                heightSpace4,
+                Text.rich(
+                  TextSpan(
+                    text: 'By: ',
+                    style: AppTheme.style.bold.copyWith(
+                      color: AppTheme.colors.appSecondary,
+                    ),
+                    children: [
+                      TextSpan(
+                        text: commitModel.commit.author.name,
+                        style: AppTheme.style.regular.copyWith(
+                          color: AppTheme.colors.appSecondary,
+                        ),
+                      ),
+                      TextSpan(
+                        text: ' - ',
+                        style: AppTheme.style.bold.copyWith(
+                          color: AppTheme.colors.appTertiary,
+                        ),
+                      ),
+                      TextSpan(
+                        text: commitModel.commit.author.email,
+                        style: AppTheme.style.regular.copyWith(
+                          color: AppTheme.colors.appTertiary,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
                 heightSpace2,
                 Text(
-                  commitModel.commit.author.name,
+                  commitModel.commit.message,
                   style: TextStyle(
                     color: AppTheme.colors.appSecondary,
                   ),
                 ),
-                heightSpace4,
               ],
             ),
             tileColor: Colors.transparent,

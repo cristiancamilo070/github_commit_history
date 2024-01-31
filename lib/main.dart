@@ -5,7 +5,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:github_commit_history/core/config/dependency_creator.dart';
-import 'package:github_commit_history/core/config/firebase_manager.dart';
 import 'package:github_commit_history/core/localization/repositories/localization_repository.dart';
 import 'package:github_commit_history/core/routes/app_routes.dart';
 import 'package:github_commit_history/core/routes/path_routes.dart';
@@ -26,7 +25,7 @@ void main() async {
   ));
 
   /// Initialize Firebase
-  await FirebaseManager.initializeApp();
+  // await FirebaseManager.initializeApp();
 
   /// Init dependency
   DependencyCreator.initialize();
