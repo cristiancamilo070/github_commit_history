@@ -1,0 +1,21 @@
+{
+    
+    "CANCEL":"Cancel",
+    "HI_NAME": "Hi @name!",
+    "TITLE":"Title",
+    "WELCOME":"Welcome",
+    "DESCRIPTION":"Description",
+    "COMPLETED":"Completed",
+    "SAVE":"Save",
+    "DELETE":"Delete",
+    "SAVED_SUCCESS":"Successfully saved",
+    "DELETE_SUCCESS":"Successfully deleted",
+
+    "OWNER": "Repository owner",
+    "REPO":"Repository name",
+    "SEARCH":"Search",
+    "SEARCH_SUCCESS":"Commit history search successful",
+    "SEARCH_COMMIT_HISTORY":"Search for a GitHub commit history",
+    "GITHUB_COMMIT_HISTORY":"GitHub Commit History"
+
+}

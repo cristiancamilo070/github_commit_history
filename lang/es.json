@@ -1,0 +1,21 @@
+{
+   
+    "CANCEL":"Cancelar",
+    "HI_NAME": "Hola @name!",
+    "TITLE":"Título",
+    "WELCOME":"Bienvenido",
+    "DESCRIPTION":"Descripción",
+    "COMPLETED":"Completada",
+    "SAVE":"Guardar",
+    "DELETE":"Eliminar",
+    "SAVED_SUCCESS":"Guardada exitosamente",
+    "DELETE_SUCCESS":"Nota eliminada exitosamente",
+
+    "OWNER":"Dueño del repositorio",
+    "REPO":"Nombre del repositorio",
+    "SEARCH":"Buscar",
+    "SEARCH_SUCCESS":"Busqueda de historial de commits exitosa",
+    "SEARCH_COMMIT_HISTORY":"Buscar historial de commits de GitHub",
+    "GITHUB_COMMIT_HISTORY":"Historial de Commits de GitHub"
+
+}
