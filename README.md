@@ -33,6 +33,27 @@ GitHub Commit History is a project with both frontend and backend components. Th
 
 </p>
 
+## Running the Flutter Project Locally
+
+To run this Flutter project locally, follow these steps:
+
+- Make sure you have Flutter and Dart installed on your machine.
+- Clone the GitHub repository to your local machine using the following command:
+
+```bash
+git clone https://github.com/tu-usuario/tu-repo.git
+```
+
+- then run
+
+```bash
+flutter pub get
+```
+
+```bash
+flutter run
+```
+
 # Frontend Overview
 
 <div style="display: flex; justify-content: space-between;">
@@ -55,20 +76,6 @@ GitHub Commit History is a project with both frontend and backend components. Th
 
 This Flutter frontend follows the principles of Clean Architecture and Clean Code, providing a structured and maintainable codebase.
 
-## Additional Features
-
-### Snackbar Notifications
-
-The app includes Snackbar notifications to provide users with important information or updates.
-
-### Splash Screen
-
-A Splash Screen is implemented to enhance the user experience by displaying a visual indication that the app is loading.
-
-### Default App Language
-
-The app automatically detects the device language and sets it as the default language, ensuring a seamless experience for users in their preferred language.
-
 ## User Functionality
 
 ### Search Repositories
@@ -83,9 +90,24 @@ The app provides access to public repositories, enabling users to view details a
 
 Users are presented with suggested repositories, helping them discover interesting and trending projects within the GitHub community.
 
+## Additional Features
+
+### Snackbar Notifications
+
+The app includes Snackbar notifications to provide users with important information or updates.
+
+### Splash Screen
+
+A Splash Screen is implemented to enhance the user experience by displaying a visual indication that the app is loading.
+
+### Default App Language
+
+The app automatically detects the device language and sets it as the default language, ensuring a seamless experience for users in their preferred language.
+
 ## Backend Overview
 
 The backend uses NestJS, a robust framework for building scalable server-side applications. It features dependency injection, middleware, and a modular structure.
+To see the methods that were worked on the backend, press the search button -> press the backend button -> press search -> go to any commit -> go to src folder -> go to app.controller.ts file, here you can see the methods.
 
 ### Deployment
 
