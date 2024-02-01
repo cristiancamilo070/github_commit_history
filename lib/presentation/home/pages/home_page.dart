@@ -205,7 +205,7 @@ class HomePage extends GetView<HomeController> {
   Widget body() {
     return Obx(
       () {
-        return (controller.listOfCommits.value != null)
+        return (!controller.commitLoading.value)
             ? Column(
                 children: [
                   Text('SELECT_COMMIT_TO'.tr,
@@ -215,7 +215,7 @@ class HomePage extends GetView<HomeController> {
                       )).paddingSymmetric(horizontal: 16.w),
                   heightSpace16,
                   SizedBox(
-                    height: 430.h,
+                    height: 390.h,
                     child: ListView.separated(
                       separatorBuilder: (context, index) => heightSpace16,
                       itemCount: controller.listOfCommits.value?.length ?? 0,
@@ -229,15 +229,38 @@ class HomePage extends GetView<HomeController> {
                   )
                 ],
               )
-            : Expanded(
-                child: Center(
-                  child: CircularProgressIndicator(
-                    color: AppTheme.colors.appSecondary,
-                    backgroundColor: AppTheme.colors.appQuaternary,
-                    strokeWidth: 5,
-                  ),
-                ),
-              );
+            : (controller.commitError.value)
+                ? Expanded(
+                    child: Center(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          FaIcon(
+                            FontAwesomeIcons.circleExclamation,
+                            color: AppTheme.colors.appAlert,
+                          ),
+                          heightSpace8,
+                          Text(
+                            'ERROR_SERVER'.tr,
+                            textAlign: TextAlign.center,
+                            style: AppTheme.style.bold.copyWith(
+                              fontSize: AppTheme.fontSize.f14,
+                              color: AppTheme.colors.appAlert,
+                            ),
+                          ),
+                        ],
+                      ).paddingSymmetric(horizontal: 50.w),
+                    ),
+                  )
+                : Expanded(
+                    child: Center(
+                      child: CircularProgressIndicator(
+                        color: AppTheme.colors.appSecondary,
+                        backgroundColor: AppTheme.colors.appQuaternary,
+                        strokeWidth: 5,
+                      ),
+                    ),
+                  );
       },
     );
   }

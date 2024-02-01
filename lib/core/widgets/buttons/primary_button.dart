@@ -14,6 +14,7 @@ class PrimaryButton extends StatelessWidget {
   final String? text;
   final bool isDisabled;
   final String? svgAsset;
+  final Color? borderColor;
 
   const PrimaryButton({
     Key? key,
@@ -27,6 +28,7 @@ class PrimaryButton extends StatelessWidget {
     this.overlayColor,
     this.isDisabled = false,
     this.svgAsset,
+    this.borderColor,
   }) : super(key: key);
 
   Color get _color => color ?? AppTheme.colors.appPrimary;
@@ -53,6 +55,12 @@ class PrimaryButton extends StatelessWidget {
           shape: MaterialStateProperty.all(
             RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(borderRadius ?? 10),
+              side: (borderColor != null)
+                  ? BorderSide(
+                      color: borderColor!,
+                      width: 2.0,
+                    )
+                  : BorderSide.none,
             ),
           ),
         ),

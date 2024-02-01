@@ -1,28 +1,30 @@
 // ignore_for_file: avoid_print
-
-import 'dart:developer';
-
 import 'package:dio/dio.dart';
 import 'package:github_commit_history/domain/models/commit_blob_model.dart';
 import 'package:github_commit_history/domain/models/commit_tree_model.dart';
 import 'package:github_commit_history/domain/models/commits_model.dart';
 
 class GitHubProvider {
+  Dio dio = Dio();
+
   Future<Response<List<GitHubCommitModel>?>> getCommits({
     required String owner,
     required String repo,
   }) async {
     try {
-      Dio dio = Dio();
-      print('https://api.github.com/repos/$owner/$repo/commits');
       final response = await dio.get(
-        'https://api.github.com/repos/$owner/$repo/commits',
-        options: Options(
-          headers: {
-            'Accept': 'application/vnd.github.v3+json',
-            //'Authorization': 'Bearer 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',
-          },
-        ),
+        'https://github-commit-history-backend.fly.dev/api/commits',
+        //'http://localhost:3000/api/commits',
+        queryParameters: {
+          'owner': owner,
+          'repo': repo,
+        },
+        // options: Options(
+        //   headers: {
+        //     'Accept': 'application/vnd.github.v3+json',
+        //        'Authorization': 'Bearer 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',
+        //   },
+        // ),
       );
 
       if (response.statusCode == 200) {
@@ -40,10 +42,13 @@ class GitHubProvider {
 
         return result;
       } else {
-        throw Exception('Failed to load commits');
+        throw DioException(
+          response: response,
+          requestOptions: response.requestOptions,
+        );
       }
     } catch (error) {
-      log('GitHub API ERROR: $error');
+      print('Error getCommits: $error');
       rethrow;
     }
   }
@@ -52,15 +57,18 @@ class GitHubProvider {
     required String url,
   }) async {
     try {
-      Dio dio = Dio();
       final response = await dio.get(
-        url,
-        options: Options(
-          headers: {
-            'Accept': 'application/vnd.github.v3+json',
-            //   'Authorization': 'Bearer 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',
-          },
-        ),
+        'https://github-commit-history-backend.fly.dev/api/commitTree',
+        //'http://localhost:3000/api/commitTree',
+        queryParameters: {
+          'url': url,
+        },
+        // options: Options(
+        //   headers: {
+        //     'Accept': 'application/vnd.github.v3+json',
+        //        'Authorization': 'Bearer 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',
+        //   },
+        // ),
       );
 
       if (response.statusCode == 200) {
@@ -76,10 +84,13 @@ class GitHubProvider {
 
         return result;
       } else {
-        throw Exception('Failed to load commit tree');
+        throw DioException(
+          response: response,
+          requestOptions: response.requestOptions,
+        );
       }
     } catch (error) {
-      log('GitHub API ERROR: $error');
+      print('Error: getCommitTree $error');
       rethrow;
     }
   }
@@ -88,15 +99,18 @@ class GitHubProvider {
     required String url,
   }) async {
     try {
-      Dio dio = Dio();
       final response = await dio.get(
-        url,
-        options: Options(
-          headers: {
-            'Accept': 'application/vnd.github.v3+json',
-            //        'Authorization': 'Bearer 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',
-          },
-        ),
+        'https://github-commit-history-backend.fly.dev/api/commitBlob',
+        //'http://localhost:3000/api/commitBlob',
+        queryParameters: {
+          'url': url,
+        },
+        // options: Options(
+        //   headers: {
+        //     'Accept': 'application/vnd.github.v3+json',
+        //        'Authorization': 'Bearer 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',
+        //   },
+        // ),
       );
 
       if (response.statusCode == 200) {
@@ -112,10 +126,13 @@ class GitHubProvider {
 
         return result;
       } else {
-        throw Exception('Failed to load commit blob');
+        throw DioException(
+          response: response,
+          requestOptions: response.requestOptions,
+        );
       }
     } catch (error) {
-      log('GitHub API ERROR: $error');
+      print('Error getCommitBlob: $error');
       rethrow;
     }
   }

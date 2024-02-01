@@ -12,12 +12,16 @@ class GitHubRepoForm extends StatefulWidget {
   final String? initialOwner;
   final String? initialRepo;
   final Function() searchButton;
+  final Function() frontButton;
+  final Function() backButton;
 
   const GitHubRepoForm({
     Key? key,
     this.initialOwner,
     this.initialRepo,
     required this.searchButton,
+    required this.backButton,
+    required this.frontButton,
   }) : super(key: key);
 
   @override
@@ -43,11 +47,13 @@ class _GitHubRepoFormState extends State<GitHubRepoForm> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Text('SEARCH_COMMIT_HISTORY'.tr,
-              style: AppTheme.style.bold.copyWith(
-                fontSize: AppTheme.fontSize.f20,
-                color: AppTheme.colors.appPrimary,
-              )),
+          Text(
+            'SEARCH_COMMIT_HISTORY'.tr,
+            style: AppTheme.style.bold.copyWith(
+              fontSize: AppTheme.fontSize.f20,
+              color: AppTheme.colors.appPrimary,
+            ),
+          ),
           heightSpace20,
           AppTextField(
             inputsParams: AppInputParameters(
@@ -64,7 +70,46 @@ class _GitHubRepoFormState extends State<GitHubRepoForm> {
               inputType: AppInputType.text,
             ),
           ),
-          heightSpace16,
+          heightSpace8,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              SizedBox(
+                width: 65.w,
+                child: Text(
+                  'Sugested repos: '.tr,
+                  style: AppTheme.style.bold.copyWith(
+                    fontSize: AppTheme.fontSize.f12,
+                    color: AppTheme.colors.appPrimary,
+                  ),
+                ),
+              ),
+              PrimaryButton(
+                svgAsset: 'assets/svg/flutter-logo.svg',
+                text: 'Frontend'.tr,
+                style: AppTheme.style.regular.copyWith(
+                  color: AppTheme.colors.appPrimary,
+                ),
+                color: AppTheme.colors.white,
+                onPressed: widget.frontButton,
+                overlayColor: AppTheme.colors.appSuccess.withOpacity(0.3),
+                borderColor: AppTheme.colors.appTertiary,
+              ),
+              PrimaryButton(
+                svgAsset: 'assets/svg/nest-logo.svg',
+                text: 'Backend'.tr,
+                style: AppTheme.style.regular.copyWith(
+                  color: AppTheme.colors.appPrimary,
+                ),
+                color: AppTheme.colors.white,
+                onPressed: widget.backButton,
+                overlayColor: AppTheme.colors.appSuccess.withOpacity(0.3),
+                borderRadius: 2,
+                borderColor: AppTheme.colors.appTertiary,
+              ),
+            ],
+          ),
+          heightSpace8,
           PrimaryButton(
             svgAsset: 'assets/svg/github-mark-white.svg',
             text: 'SEARCH'.tr,

@@ -9,6 +9,12 @@
     "SAVE":"Save",
     "DELETE":"Delete",
     "SUCCESS":"Success",
+    "ERROR": "Unexpected error",
+
+    "ERROR_SERVER": "Unexpected error connecting to the server",
+    "ERROR_COMMIT": "Unexpected error getting the commit",
+    "ERROR_TREE": "Unexpected error getting the commit tree",
+    "ERROR_BLOB": "Unexpected error getting the commit blob",
 
     "OWNER": "Repository owner",
     "REPO":"Repository name",

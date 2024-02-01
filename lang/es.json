@@ -9,6 +9,12 @@
     "SAVE":"Guardar",
     "DELETE":"Eliminar",
     "SUCCESS":"Proceso exitoso",
+    "ERROR":"Error inesperado",
+
+    "ERROR_SERVER": "Error inesperado conectándose al servidor",
+    "ERROR_COMMIT": "Error inesperado al obtener el commit",
+    "ERROR_TREE": "Error inesperado al obtener el árbol del commit",
+    "ERROR_BLOB": "Error inesperado al obtener el blob del commit",
 
     "OWNER":"Dueño del repositorio",
     "REPO":"Nombre del repositorio",

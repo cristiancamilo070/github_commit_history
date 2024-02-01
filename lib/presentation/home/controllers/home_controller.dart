@@ -27,6 +27,8 @@ class HomeController extends BaseGetxController {
   Rx<List<GitHubCommitModel>?> listOfCommits = Rx(null);
   RxString ownerTitle = 'cristiancamilo070'.obs;
   RxString repoTitle = 'github_commit_history'.obs;
+  RxBool commitError = false.obs;
+  RxBool commitLoading = false.obs;
 
   @override
   void onInit() {
@@ -44,10 +46,15 @@ class HomeController extends BaseGetxController {
   }
 
   Future<void> getCommits(GetCommitsParams params) async {
+    commitLoading(true);
     final result = await _getCommitsUseCase.execute(params);
 
     result.fold((l) {
-      return false;
+      showErrorMessage(
+        "ERROR".tr,
+        "ERROR_COMMIT".tr,
+      );
+      commitError(true);
     }, (r) {
       showLoading();
       Get.back();
@@ -59,7 +66,7 @@ class HomeController extends BaseGetxController {
       repoTitle.value = repoController.text;
       listOfCommits.value = r;
       closeLoading();
-      return true;
+      commitLoading(false);
     });
   }
 
@@ -68,12 +75,15 @@ class HomeController extends BaseGetxController {
     final result = await _commitTreeUseCase.execute(params);
 
     result.fold((l) {
+      showErrorMessage(
+        "ERROR".tr,
+        "ERROR_TREE".tr,
+      );
       return false;
     }, (r) {
       showLoading();
       print(r!.tree.length);
       Get.to(() => const EmptyPage());
-
       Get.to(() => CommitDetailsPage(
             widgetTree: r,
             commitTitle: title,
@@ -91,6 +101,10 @@ class HomeController extends BaseGetxController {
     final result = await _commitBlobUseCase.execute(params);
 
     result.fold((l) {
+      showErrorMessage(
+        "ERROR".tr,
+        "ERROR_BLOB".tr,
+      );
       return false;
     }, (r) {
       showLoading();
@@ -127,7 +141,7 @@ class HomeController extends BaseGetxController {
     return SingleChildScrollView(
       child: SafeArea(
         child: SizedBox(
-          height: 240.h,
+          height: 280.h,
           child: GitHubRepoForm(
             searchButton: () async {
               await getCommits(
@@ -136,6 +150,14 @@ class HomeController extends BaseGetxController {
                   repoController.text,
                 ),
               );
+            },
+            backButton: () {
+              ownerController.text = 'cristiancamilo070';
+              repoController.text = 'github_commit_history_backend';
+            },
+            frontButton: () {
+              ownerController.text = 'cristiancamilo070';
+              repoController.text = 'github_commit_history';
             },
           ),
         ),
