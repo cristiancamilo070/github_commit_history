@@ -13,15 +13,6 @@ GitHub Commit History is a project with both frontend and backend components. Th
     <img src="https://img.shields.io/github/watchers/cristiancamilo070/github_commit_history.svg?style=social" alt="GitHub Watchers" />
   </a>
   <a href="https://github.com/cristiancamilo070/github_commit_history" target="_blank">
-    <img src="https://img.shields.io/github/license/cristiancamilo070/github_commit_history.svg" alt="License" />
-  </a>
-  <a href="https://github.com/cristiancamilo070/github_commit_history" target="_blank">
-    <img src="https://img.shields.io/github/issues/cristiancamilo070/github_commit_history.svg" alt="GitHub Issues" />
-  </a>
-  <a href="https://github.com/cristiancamilo070/github_commit_history" target="_blank">
-    <img src="https://img.shields.io/github/issues-closed/cristiancamilo070/github_commit_history.svg" alt="GitHub Closed Issues" />
-  </a>
-  <a href="https://github.com/cristiancamilo070/github_commit_history" target="_blank">
     <img src="https://img.shields.io/github/languages/count/cristiancamilo070/github_commit_history.svg" alt="GitHub Languages Count" />
   </a>
   <a href="https://github.com/cristiancamilo070/github_commit_history" target="_blank">
@@ -39,19 +30,25 @@ GitHub Commit History is a project with both frontend and backend components. Th
   <a href="https://github.com/cristiancamilo070/github_commit_history" target="_blank">
     <img src="https://img.shields.io/github/contributors/cristiancamilo070/github_commit_history.svg" alt="GitHub Contributors" />
   </a>
-  <a href="https://github.com/cristiancamilo070/github_commit_history" target="_blank">
-    <img src="https://img.shields.io/github/stars/cristiancamilo070/github_commit_history.svg?style=social" alt="GitHub Stars" />
-  </a>
-  <a href="https://github.com/cristiancamilo070/github_commit_history" target="_blank">
-    <img src="https://img.shields.io/github/forks/cristiancamilo070/github_commit_history.svg?style=social" alt="GitHub Forks" />
-  </a>
+
 </p>
 
 # Frontend Overview
 
 <div style="display: flex; justify-content: space-between;">
-  <img src="assets/screenshots/1.png" alt="Screenshot 1" width="800" height="500">
-  <img src="assets/screenshots/5.png" alt="Screenshot 2" width="800" height="500">
+  <img src="assets/screenshots/0.png" alt="Screenshot 1" width="400" height="600">
+  <img src="assets/screenshots/1.png" alt="Screenshot 2" width="400" height="600">
+</div>
+<div style="display: flex; justify-content: space-between;">
+  <img src="assets/screenshots/2.png" alt="Screenshot 1" width="400" height="600">
+  <img src="assets/screenshots/3.png" alt="Screenshot 2" width="400" height="600">
+</div>
+<div style="display: flex; justify-content: space-between;">
+  <img src="assets/screenshots/4.png" alt="Screenshot 1" width="400" height="600">
+  <img src="assets/screenshots/5.png" alt="Screenshot 2" width="400" height="600">
+</div>
+<div style="display: flex; justify-content: space-between;">
+  <img src="assets/screenshots/6.png" alt="Screenshot 2" width="400" height="600">
 </div>
 
 ## Clean Architecture and Code
@@ -119,4 +116,10 @@ Backend provides endpoints for tasks and user authentication.
 
 Explore the backend repository for implementation details and structure.
 
----
+## Possible Errors
+
+If you encounter the "Unexpected error connecting to the server" message, the server might be a bit slow. We recommend waiting a few seconds and trying again or refreshing the page.
+
+If the issue persists, consider running the project locally. Download the backend project [GitHub](https://github.com/cristiancamilo070/github_commit_history_backend) and run the command "npm run start". Once it's running, go to the `github_provider.dart` file in your Flutter project. Look for the comment `//TODO IN CASE SERVER FAILS`, uncomment it, and comment out the one that wasn't previously commented. This step is necessary in case there is no response from the server.
+
+Another factor that could affect the app is the GitHub API request limit. If you exceed this limit, you'll need to add your access token. To do this, go to `github_provider.dart`, find the comment `//TODO IN CASE YOU EXCEEDED THE GITHUB API REQUEST LIMIT PUT YOUR TOKEN HERE`, uncomment it, and add your token. This is also a precautionary measure in case of exceeding the GitHub API request limit.

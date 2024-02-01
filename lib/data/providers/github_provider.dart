@@ -14,7 +14,7 @@ class GitHubProvider {
     try {
       final response = await dio.get(
         'https://github-commit-history-backend.fly.dev/api/commits',
-        //'http://localhost:3000/api/commits',
+        //'http://localhost:3000/api/commits',//TODO IN CASE SERVER FAILS
         queryParameters: {
           'owner': owner,
           'repo': repo,
@@ -59,7 +59,7 @@ class GitHubProvider {
     try {
       final response = await dio.get(
         'https://github-commit-history-backend.fly.dev/api/commitTree',
-        //'http://localhost:3000/api/commitTree',
+        //'http://localhost:3000/api/commitTree',//TODO IN CASE SERVER FAILS
         queryParameters: {
           'url': url,
         },
@@ -101,7 +101,7 @@ class GitHubProvider {
     try {
       final response = await dio.get(
         'https://github-commit-history-backend.fly.dev/api/commitBlob',
-        //'http://localhost:3000/api/commitBlob',
+        //'http://localhost:3000/api/commitBlob',//TODO IN CASE SERVER FAILS
         queryParameters: {
           'url': url,
         },
