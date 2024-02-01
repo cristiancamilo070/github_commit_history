@@ -22,7 +22,9 @@ class DrawerItems extends GetView<HomeController> {
             title: "SEARCH".tr,
             padding: false,
             icon: FontAwesomeIcons.magnifyingGlass,
-            onTap: () async {},
+            onTap: () async {
+              await controller.showBottomSheet();
+            },
           ),
         ).paddingOnly(left: 30.w),
       ],

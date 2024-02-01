@@ -44,7 +44,7 @@ class HomeFloatingButton extends StatelessWidget {
             child: IconButton(
               icon: Icon(
                 FontAwesomeIcons.magnifyingGlass,
-                size: 35.r,
+                size: 32.r,
                 color: AppTheme.colors.white,
               ),
               onPressed: onTap,

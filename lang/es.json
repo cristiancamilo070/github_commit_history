@@ -8,14 +8,14 @@
     "COMPLETED":"Completada",
     "SAVE":"Guardar",
     "DELETE":"Eliminar",
-    "SAVED_SUCCESS":"Guardada exitosamente",
-    "DELETE_SUCCESS":"Nota eliminada exitosamente",
+    "SUCCESS":"Proceso exitoso",
 
     "OWNER":"Dueño del repositorio",
     "REPO":"Nombre del repositorio",
     "SEARCH":"Buscar",
     "SEARCH_SUCCESS":"Busqueda de historial de commits exitosa",
-    "SEARCH_COMMIT_HISTORY":"Buscar historial de commits de GitHub",
+    "SEARCH_COMMIT_HISTORY":"Buscar historial de commits publicos de GitHub",
+    "SELECT_COMMIT_TO":"Seleccione un commit de GitHub para ver todos los detalles del mismo: ",
     "GITHUB_COMMIT_HISTORY":"Historial de Commits de GitHub"
 
 }

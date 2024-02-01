@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'dart:developer';
 
 import 'package:dio/dio.dart';
@@ -12,12 +14,13 @@ class GitHubProvider {
   }) async {
     try {
       Dio dio = Dio();
+      print('https://api.github.com/repos/$owner/$repo/commits');
       final response = await dio.get(
         'https://api.github.com/repos/$owner/$repo/commits',
         options: Options(
           headers: {
             'Accept': 'application/vnd.github.v3+json',
-            'Authorization': 'Bearer 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',
+            //'Authorization': 'Bearer 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',
           },
         ),
       );
@@ -55,7 +58,7 @@ class GitHubProvider {
         options: Options(
           headers: {
             'Accept': 'application/vnd.github.v3+json',
-            'Authorization': 'Bearer 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',
+            //   'Authorization': 'Bearer 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',
           },
         ),
       );
@@ -91,7 +94,7 @@ class GitHubProvider {
         options: Options(
           headers: {
             'Accept': 'application/vnd.github.v3+json',
-            'Authorization': 'Bearer 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',
+            //        'Authorization': 'Bearer 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',
           },
         ),
       );

@@ -32,42 +32,47 @@ class HomeNavbar extends StatelessWidget {
                   elevation: 0,
                   padding: EdgeInsets.all(12.r),
                 ),
-                child: Container(
-                  width: 40.r,
-                  height: 40.r,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    gradient: LinearGradient(
-                      colors: [
-                        AppTheme.colors.appTertiary.withOpacity(0.9),
-                        AppTheme.colors.appPrimary.withOpacity(0.7),
-                      ],
-                      begin: Alignment.centerLeft,
-                      end: Alignment.centerRight,
-                    ),
-                    boxShadow: [
-                      BoxShadow(
-                        color: AppTheme.colors.appPrimary.withOpacity(0.5),
-                        spreadRadius: 2,
-                        blurRadius: 10,
-                        offset: const Offset(0, 4),
+                child: Row(
+                  children: [
+                    Container(
+                      width: 40.r,
+                      height: 40.r,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        gradient: LinearGradient(
+                          colors: [
+                            AppTheme.colors.appTertiary.withOpacity(0.9),
+                            AppTheme.colors.appPrimary.withOpacity(0.7),
+                          ],
+                          begin: Alignment.centerLeft,
+                          end: Alignment.centerRight,
+                        ),
+                        boxShadow: [
+                          BoxShadow(
+                            color: AppTheme.colors.appPrimary.withOpacity(0.5),
+                            spreadRadius: 2,
+                            blurRadius: 10,
+                            offset: const Offset(0, 4),
+                          ),
+                        ],
                       ),
-                    ],
-                  ),
-                  child: Center(
-                    child: ValueListenableBuilder<AdvancedDrawerValue>(
-                      valueListenable: homeController.advancedDrawerController,
-                      builder: (_, value, __) {
-                        return Icon(
-                          value.visible
-                              ? FontAwesomeIcons.xmark
-                              : FontAwesomeIcons.bars,
-                          color: AppTheme.colors.white,
-                          size: 22.2.r,
-                        );
-                      },
+                      child: Center(
+                        child: ValueListenableBuilder<AdvancedDrawerValue>(
+                          valueListenable:
+                              homeController.advancedDrawerController,
+                          builder: (_, value, __) {
+                            return Icon(
+                              value.visible
+                                  ? FontAwesomeIcons.xmark
+                                  : FontAwesomeIcons.bars,
+                              color: AppTheme.colors.white,
+                              size: 22.2.r,
+                            );
+                          },
+                        ),
+                      ),
                     ),
-                  ),
+                  ],
                 ),
               ),
             ),

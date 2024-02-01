@@ -9,7 +9,6 @@ import 'package:github_commit_history/core/widgets/animations/animations.dart';
 import 'package:github_commit_history/core/widgets/buttons/floating-button.dart';
 import 'package:github_commit_history/core/widgets/drawer/drawer.dart';
 import 'package:github_commit_history/core/widgets/drawer/navbar.dart';
-import 'package:github_commit_history/core/widgets/forms/github_repo_form.dart';
 import 'package:github_commit_history/domain/models/commits_model.dart';
 import 'package:github_commit_history/domain/use_cases/github_use_cases/get_commit_tree_use_case.dart';
 import 'package:github_commit_history/domain/use_cases/github_use_cases/get_commits_use_case.dart';
@@ -55,7 +54,73 @@ class HomePage extends GetView<HomeController> {
             ),
             child: Column(
               children: [
-                HomeNavbar(),
+                Row(
+                  children: [
+                    HomeNavbar(),
+                    Expanded(
+                      child: Text(
+                        'GITHUB_COMMIT_HISTORY'.tr,
+                        textAlign: TextAlign.center,
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                        style: TextStyle(
+                          color: AppTheme.colors.appSecondary,
+                          fontSize: AppTheme.fontSize.f18,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ).paddingSymmetric(horizontal: 16.w),
+                    ),
+                    ElevatedButton(
+                      onPressed: () async {
+                        await controller.getCommits(
+                          GetCommitsParams(
+                            controller.ownerTitle.value,
+                            controller.repoTitle.value,
+                          ),
+                        );
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.transparent,
+                        elevation: 0,
+                        padding: EdgeInsets.all(12.r),
+                      ),
+                      child: Row(
+                        children: [
+                          Container(
+                            width: 40.r,
+                            height: 40.r,
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              gradient: LinearGradient(
+                                colors: [
+                                  AppTheme.colors.appTertiary.withOpacity(0.9),
+                                  AppTheme.colors.appPrimary.withOpacity(0.7),
+                                ],
+                                begin: Alignment.centerLeft,
+                                end: Alignment.centerRight,
+                              ),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: AppTheme.colors.appPrimary
+                                      .withOpacity(0.5),
+                                  spreadRadius: 2,
+                                  blurRadius: 10,
+                                  offset: const Offset(0, 4),
+                                ),
+                              ],
+                            ),
+                            child: Icon(
+                              FontAwesomeIcons.rotateRight,
+                              color: AppTheme.colors.white,
+                              size: 22.2.r,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+                header(),
                 body(),
               ],
             ),
@@ -65,7 +130,7 @@ class HomePage extends GetView<HomeController> {
           padding: EdgeInsets.only(right: 15.w, bottom: 25.w),
           child: HomeFloatingButton(
             onTap: () async {
-              await _showBottomSheet();
+              await controller.showBottomSheet();
             },
           ),
         ),
@@ -75,19 +140,65 @@ class HomePage extends GetView<HomeController> {
 
   Widget header() {
     return Obx(
-      () => Column(
-        children: [
-          Text(
-            'GITHUB_COMMIT_HISTORY'.tr,
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              color: AppTheme.colors.appPrimary,
-              fontSize: AppTheme.fontSize.f36,
-              fontWeight: FontWeight.bold,
+      () {
+        return Column(
+          children: [
+            Row(
+              children: [
+                FaIcon(
+                  FontAwesomeIcons.github,
+                  color: AppTheme.colors.appSecondary,
+                  size: 40.r,
+                ).paddingOnly(left: 24.w),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text.rich(
+                        TextSpan(
+                          text: 'By: ',
+                          style: AppTheme.style.regular.copyWith(
+                            color: AppTheme.colors.appSecondary,
+                            fontSize: AppTheme.fontSize.f14,
+                          ),
+                          children: [
+                            TextSpan(
+                              text: controller.ownerTitle.value,
+                              style: AppTheme.style.bold.copyWith(
+                                color: AppTheme.colors.appSecondary,
+                                fontSize: AppTheme.fontSize.f14,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      Text.rich(
+                        TextSpan(
+                          text: 'Repository: ',
+                          style: AppTheme.style.regular.copyWith(
+                            color: AppTheme.colors.appSecondary,
+                            fontSize: AppTheme.fontSize.f14,
+                          ),
+                          children: [
+                            TextSpan(
+                              text: controller.repoTitle.value,
+                              style: AppTheme.style.bold.copyWith(
+                                color: AppTheme.colors.appSecondary,
+                                fontSize: AppTheme.fontSize.f14,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ).paddingSymmetric(horizontal: 16.w),
+                ),
+              ],
             ),
-          ),
-        ],
-      ),
+            heightSpace16,
+          ],
+        );
+      },
     );
   }
 
@@ -95,19 +206,28 @@ class HomePage extends GetView<HomeController> {
     return Obx(
       () {
         return (controller.listOfCommits.value != null)
-            ? Expanded(
-                child: SizedBox(
-                  child: ListView.separated(
-                    separatorBuilder: (context, index) => heightSpace16,
-                    itemCount: controller.listOfCommits.value?.length ?? 0,
-                    itemBuilder: (context, index) {
-                      GitHubCommitModel commit =
-                          controller.listOfCommits.value![index];
+            ? Column(
+                children: [
+                  Text('SELECT_COMMIT_TO'.tr,
+                      style: AppTheme.style.bold.copyWith(
+                        fontSize: AppTheme.fontSize.f16,
+                        color: AppTheme.colors.appSuccess,
+                      )).paddingSymmetric(horizontal: 16.w),
+                  heightSpace16,
+                  SizedBox(
+                    height: 430.h,
+                    child: ListView.separated(
+                      separatorBuilder: (context, index) => heightSpace16,
+                      itemCount: controller.listOfCommits.value?.length ?? 0,
+                      itemBuilder: (context, index) {
+                        GitHubCommitModel commit =
+                            controller.listOfCommits.value![index];
 
-                      return buildCommitItem(commit);
-                    },
-                  ).paddingSymmetric(horizontal: 16.w),
-                ),
+                        return buildCommitItem(commit);
+                      },
+                    ).paddingSymmetric(horizontal: 16.w),
+                  )
+                ],
               )
             : Expanded(
                 child: Center(
@@ -119,39 +239,6 @@ class HomePage extends GetView<HomeController> {
                 ),
               );
       },
-    );
-  }
-
-  Future<void> _showBottomSheet([void Function()? cb]) async {
-    await Get.bottomSheet(
-      _searchCommitsSheet(),
-      elevation: 34,
-      isScrollControlled: false,
-      backgroundColor: Colors.white,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(15),
-          topRight: Radius.circular(15),
-        ),
-      ),
-    );
-
-    cb?.call();
-  }
-
-  Widget _searchCommitsSheet() {
-    return SingleChildScrollView(
-      child: SizedBox(
-        height: 270.h,
-        child: GitHubRepoForm(
-          searchButton: () async {
-            controller.getCommits(GetCommitsParams(
-              controller.ownerController.text,
-              controller.repoController.text,
-            ));
-          },
-        ),
-      ),
     );
   }
 
@@ -202,7 +289,12 @@ class HomePage extends GetView<HomeController> {
                   fontSize: AppTheme.fontSize.f16,
                   color: AppTheme.colors.appPrimary,
                 )).paddingOnly(top: 4.h),
-            trailing: FaIcon(FontAwesomeIcons.github),
+            leading: FaIcon(
+              FontAwesomeIcons.upLong,
+              color: AppTheme.colors.appSuccess,
+              size: 30.r,
+            ).paddingOnly(left: 14.w),
+            contentPadding: EdgeInsets.only(right: 8.w),
             subtitle: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -236,12 +328,6 @@ class HomePage extends GetView<HomeController> {
                   ),
                 ),
                 heightSpace2,
-                Text(
-                  commitModel.commit.message,
-                  style: TextStyle(
-                    color: AppTheme.colors.appSecondary,
-                  ),
-                ),
               ],
             ),
             tileColor: Colors.transparent,

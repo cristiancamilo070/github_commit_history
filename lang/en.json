@@ -8,14 +8,14 @@
     "COMPLETED":"Completed",
     "SAVE":"Save",
     "DELETE":"Delete",
-    "SAVED_SUCCESS":"Successfully saved",
-    "DELETE_SUCCESS":"Successfully deleted",
+    "SUCCESS":"Success",
 
     "OWNER": "Repository owner",
     "REPO":"Repository name",
     "SEARCH":"Search",
     "SEARCH_SUCCESS":"Commit history search successful",
-    "SEARCH_COMMIT_HISTORY":"Search for a GitHub commit history",
+    "SEARCH_COMMIT_HISTORY":"Search for a public GitHub commit history",
+    "SELECT_COMMIT_TO":"Select a GitHub commit to see all the details about it: ",
     "GITHUB_COMMIT_HISTORY":"GitHub Commit History"
 
 }

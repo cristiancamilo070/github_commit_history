@@ -8,7 +8,7 @@ class AppColors {
   Color appGrey = const Color(0xD6D6D7CE);
   Color appAlert = const Color(0xFFDC2222);
   Color appSuccess = const Color(0xFF00B383);
-  Color appWarning = const Color(0xFFFFAA1C);
+  Color appWarning = const Color(0xFFFEC260);
   Color appBlackGrey = const Color(0xFF2F2F2F);
   Color appBlack = const Color(0xFF040404);
   Color white = Colors.white;
