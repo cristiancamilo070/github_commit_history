@@ -19,10 +19,10 @@ class GitHubProvider {
           'owner': owner,
           'repo': repo,
         },
-        // options: Options(
+        // options: Options(//TODO IN CASE YOU EXCEEDED THE GITHUB API REQUEST LIMIT PUT YOUR TOKEN HERE
         //   headers: {
         //     'Accept': 'application/vnd.github.v3+json',
-        //        'Authorization': 'Bearer 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',
+        //        'Authorization': 'Bearer @YOUR_TOKEN',
         //   },
         // ),
       );
@@ -63,10 +63,10 @@ class GitHubProvider {
         queryParameters: {
           'url': url,
         },
-        // options: Options(
+        // options: Options(//TODO IN CASE YOU EXCEEDED THE GITHUB API REQUEST LIMIT PUT YOUR TOKEN HERE
         //   headers: {
         //     'Accept': 'application/vnd.github.v3+json',
-        //        'Authorization': 'Bearer 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',
+        //        'Authorization': 'Bearer @YOUR_TOKEN',
         //   },
         // ),
       );
@@ -105,10 +105,10 @@ class GitHubProvider {
         queryParameters: {
           'url': url,
         },
-        // options: Options(
+        // options: Options(//TODO IN CASE YOU EXCEEDED THE GITHUB API REQUEST LIMIT PUT YOUR TOKEN HERE
         //   headers: {
         //     'Accept': 'application/vnd.github.v3+json',
-        //        'Authorization': 'Bearer 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',
+        //        'Authorization': 'Bearer @YOUR_TOKEN',
         //   },
         // ),
       );
