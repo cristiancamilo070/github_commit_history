@@ -206,28 +206,28 @@ class HomePage extends GetView<HomeController> {
     return Obx(
       () {
         return (!controller.commitLoading.value)
-            ? Column(
-                children: [
-                  Text('SELECT_COMMIT_TO'.tr,
-                      style: AppTheme.style.bold.copyWith(
-                        fontSize: AppTheme.fontSize.f16,
-                        color: AppTheme.colors.appSuccess,
-                      )).paddingSymmetric(horizontal: 16.w),
-                  heightSpace16,
-                  SizedBox(
-                    height: 390.h,
-                    child: ListView.separated(
-                      separatorBuilder: (context, index) => heightSpace16,
-                      itemCount: controller.listOfCommits.value?.length ?? 0,
-                      itemBuilder: (context, index) {
-                        GitHubCommitModel commit =
-                            controller.listOfCommits.value![index];
-
-                        return buildCommitItem(commit);
-                      },
-                    ).paddingSymmetric(horizontal: 16.w),
-                  )
-                ],
+            ? Expanded(
+                child: Column(
+                  children: [
+                    Text('SELECT_COMMIT_TO'.tr,
+                        style: AppTheme.style.bold.copyWith(
+                          fontSize: AppTheme.fontSize.f16,
+                          color: AppTheme.colors.appSuccess,
+                        )).paddingSymmetric(horizontal: 16.w),
+                    heightSpace16,
+                    Expanded(
+                      child: ListView.separated(
+                        separatorBuilder: (context, index) => heightSpace16,
+                        itemCount: controller.listOfCommits.value?.length ?? 0,
+                        itemBuilder: (context, index) {
+                          GitHubCommitModel commit =
+                              controller.listOfCommits.value![index];
+                          return buildCommitItem(commit);
+                        },
+                      ),
+                    ),
+                  ],
+                ).paddingSymmetric(horizontal: 16),
               )
             : (controller.commitError.value)
                 ? Expanded(
