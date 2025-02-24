@@ -53,6 +53,13 @@ class CommitBlobPage extends StatelessWidget {
       children: [
         Row(
           children: [
+            InkWell(
+              onTap: () => Get.back(),
+              child: FaIcon(
+                FontAwesomeIcons.arrowLeft,
+                color: AppTheme.colors.appPrimary,
+              ),
+            ).paddingOnly(left: 16),
             FaIcon(
               FontAwesomeIcons.fileCode,
               color: AppTheme.colors.appSuccess,
